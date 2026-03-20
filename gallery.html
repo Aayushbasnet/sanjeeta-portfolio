@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sanjeeta Bhandari | Playful Gallery</title>
+    <meta
+      name="description"
+      content="Interactive gallery page for Sanjeeta Bhandari featuring playful classroom-inspired layouts and showcase sections."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="gallery-page">
+    <div class="cursor-flower" aria-hidden="true"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">SB</span>
+          <span class="brand-copy">
+            <strong>Sanjeeta Bhandari</strong>
+            <small>Gallery of joyful learning</small>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="#slider">Highlights</a>
+          <a href="#layouts">Showcase</a>
+          <a href="#future-audio">Audio</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="gallery-hero">
+          <div>
+            <p class="eyebrow">Playful Gallery</p>
+            <h1>A scrapbook-style space to showcase learning stories and classroom magic.</h1>
+            <p class="hero-text">
+              This page is designed to feel interactive and cheerful, with a
+              flower cursor trail, a slideshow, and playful mixed-size gallery
+              cards. As you add more work samples and photos, we can drop them
+              right into this structure.
+            </p>
+          </div>
+          <a class="button button-primary" href="assets/downloads/Sanjeeta-Bhandari-Portfolio-Flyer.png" download>
+            Download Portfolio Flyer
+          </a>
+        </section>
+
+        <section class="slider-section" id="slider">
+          <div class="section-heading">
+            <p class="section-kicker">Interactive Slideshow</p>
+            <h2>A rotating peek into your work and story.</h2>
+          </div>
+
+          <div class="slider" data-slider>
+            <div class="slides">
+              <article class="slide is-active">
+                <div class="slide-image-frame">
+                  <img
+                    src="assets/images/flyer-preview.png"
+                    alt="Sanjeeta Bhandari meet your teacher flyer"
+                  />
+                </div>
+                <div class="slide-copy">
+                  <span class="slide-sticker">Featured Story</span>
+                  <h3>Meet Your Teacher</h3>
+                  <p>
+                    A cheerful introduction that blends your personality,
+                    values, and classroom warmth into one memorable visual.
+                  </p>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="slide-art butterfly-art">
+                  <span>🦋</span>
+                  <span>🌼</span>
+                  <span>🔍</span>
+                </div>
+                <div class="slide-copy">
+                  <span class="slide-sticker">Inquiry Project</span>
+                  <h3>Butterfly Life Cycle</h3>
+                  <p>
+                    A project built around observation, curiosity, and wonder,
+                    with children asking questions and noticing change.
+                  </p>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="slide-art stem-art">
+                  <span>🧪</span>
+                  <span>🚤</span>
+                  <span>🎨</span>
+                </div>
+                <div class="slide-copy">
+                  <span class="slide-sticker">STEM Play</span>
+                  <h3>Experiments and Discovery</h3>
+                  <p>
+                    Floating boats and chromatography turned hands-on play into
+                    meaningful investigation and conversation.
+                  </p>
+                </div>
+              </article>
+
+              <article class="slide">
+                <div class="slide-art math-art">
+                  <span>🎳</span>
+                  <span>🔢</span>
+                  <span>⭐</span>
+                </div>
+                <div class="slide-copy">
+                  <span class="slide-sticker">Numeracy Fun</span>
+                  <h3>Bowling Math Game</h3>
+                  <p>
+                    Active, playful numeracy experiences that support counting,
+                    turn-taking, confidence, and problem solving.
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <div class="slider-controls">
+              <button class="slider-button" type="button" data-slider-prev>
+                Previous
+              </button>
+              <div class="slider-dots" data-slider-dots></div>
+              <button class="slider-button" type="button" data-slider-next>
+                Next
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="gallery-layouts" id="layouts">
+          <div class="section-heading">
+            <p class="section-kicker">Showcase Layout</p>
+            <h2>Playful frames for photos, project samples, and learning stories.</h2>
+          </div>
+
+          <div class="mosaic-grid">
+            <article class="mosaic-card tall sky">
+              <span class="mosaic-label">Warm Relationships</span>
+              <h3>Classrooms where children feel safe, known, and encouraged.</h3>
+              <p>
+                A lovely place for photos of welcoming learning spaces,
+                morning routines, or calm transition moments.
+              </p>
+            </article>
+
+            <article class="mosaic-card image-card">
+              <img
+                src="assets/images/flyer-preview.png"
+                alt="Portfolio flyer preview"
+              />
+            </article>
+
+            <article class="mosaic-card peach">
+              <span class="mosaic-label">Creative Play</span>
+              <h3>Art, craft, colour, and imaginative exploration.</h3>
+              <p>
+                Perfect for glittery, hands-on, child-led creations and
+                process-based artwork.
+              </p>
+            </article>
+
+            <article class="mosaic-card green wide">
+              <span class="mosaic-label">Learning Stories</span>
+              <h3>Documenting growth through meaningful observations and reflection.</h3>
+              <p>
+                This space can hold project highlights, reflective practice, or
+                polished portfolio snapshots.
+              </p>
+            </article>
+
+            <article class="mosaic-card lavender">
+              <span class="mosaic-label">STEM Corners</span>
+              <h3>Exploring, predicting, testing, and talking together.</h3>
+              <p>
+                A great fit for science provocations, messy play, and inquiry
+                invitations.
+              </p>
+            </article>
+
+            <article class="mosaic-card image-card">
+              <img
+                src="assets/images/cv-preview-page1.png"
+                alt="Preview of the first page of Sanjeeta's CV"
+              />
+            </article>
+          </div>
+        </section>
+
+        <section class="future-audio" id="future-audio">
+          <div class="section-heading">
+            <p class="section-kicker">Audio Ideas</p>
+            <h2>Theme-matching sounds we can add next.</h2>
+          </div>
+          <div class="audio-ideas">
+            <article class="audio-idea-card">
+              <h3>Garden Morning</h3>
+              <p>
+                Soft birds, a calm breeze, and gentle ambience for your welcome
+                or about section.
+              </p>
+            </article>
+            <article class="audio-idea-card">
+              <h3>Story Time Sparkle</h3>
+              <p>
+                A subtle playful tune for gallery transitions, highlights, or
+                project reveals.
+              </p>
+            </article>
+            <article class="audio-idea-card">
+              <h3>Calm Classroom Corner</h3>
+              <p>
+                Relaxing background sound for reflective sections and learning
+                story pages.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

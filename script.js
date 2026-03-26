@@ -18,40 +18,6 @@ const observer = new IntersectionObserver(
 
 sectionsToReveal.forEach((section) => observer.observe(section));
 
-const audioDock = document.querySelector("[data-audio-dock]");
-
-if (audioDock) {
-  const audioIdeas = [
-    {
-      title: "Garden Morning",
-      description: "Great for the hero or welcome section",
-      hint: "Add an MP3 later in assets/audio"
-    },
-    {
-      title: "Story Time Sparkle",
-      description: "Lovely for gallery transitions and project highlights",
-      hint: "This slot is ready for a gentle theme track"
-    },
-    {
-      title: "Calm Classroom Corner",
-      description: "Perfect for reflective sections or learning stories",
-      hint: "Nature ambience or soft music would fit beautifully"
-    }
-  ];
-
-  audioDock.innerHTML = audioIdeas
-    .map(
-      (item) => `
-        <article class="audio-chip">
-          <strong>${item.title}</strong>
-          <span>${item.description}</span>
-          <p>${item.hint}</p>
-        </article>
-      `
-    )
-    .join("");
-}
-
 const slider = document.querySelector("[data-slider]");
 
 if (slider) {
@@ -199,5 +165,87 @@ if (homePage && bloomCursor && window.matchMedia("(pointer: fine)").matches) {
 
   window.addEventListener("mouseleave", () => {
     bloomCursor.style.opacity = "0";
+  });
+}
+
+const formatAudioTime = (seconds) => {
+  if (!Number.isFinite(seconds)) return "0:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60)
+    .toString()
+    .padStart(2, "0");
+  return `${mins}:${secs}`;
+};
+
+const audioCards = Array.from(document.querySelectorAll("[data-audio-card]"));
+
+if (audioCards.length) {
+  const pauseOtherAudio = (activeAudio) => {
+    audioCards.forEach((card) => {
+      const audio = card.querySelector("[data-audio-element]");
+      const toggle = card.querySelector("[data-audio-toggle]");
+      if (audio !== activeAudio) {
+        audio.pause();
+        card.dataset.playing = "false";
+        if (toggle) toggle.textContent = "Play";
+      }
+    });
+  };
+
+  audioCards.forEach((card) => {
+    const audio = card.querySelector("[data-audio-element]");
+    const toggle = card.querySelector("[data-audio-toggle]");
+    const progress = card.querySelector("[data-audio-progress]");
+    const current = card.querySelector("[data-audio-current]");
+    const duration = card.querySelector("[data-audio-duration]");
+    const volume = card.querySelector("[data-audio-volume]");
+
+    if (!audio || !toggle || !progress || !current || !duration || !volume) return;
+
+    card.dataset.playing = "false";
+    audio.volume = Number(volume.value);
+
+    const syncProgress = () => {
+      const percent = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      progress.style.width = `${percent}%`;
+      current.textContent = formatAudioTime(audio.currentTime);
+    };
+
+    audio.addEventListener("loadedmetadata", () => {
+      duration.textContent = formatAudioTime(audio.duration);
+      syncProgress();
+    });
+
+    audio.addEventListener("timeupdate", syncProgress);
+
+    audio.addEventListener("play", () => {
+      pauseOtherAudio(audio);
+      card.dataset.playing = "true";
+      toggle.textContent = "Pause";
+    });
+
+    audio.addEventListener("pause", () => {
+      card.dataset.playing = "false";
+      toggle.textContent = "Play";
+    });
+
+    audio.addEventListener("ended", () => {
+      card.dataset.playing = "false";
+      toggle.textContent = "Play";
+      progress.style.width = "0%";
+      current.textContent = "0:00";
+    });
+
+    toggle.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
+    volume.addEventListener("input", () => {
+      audio.volume = Number(volume.value);
+    });
   });
 }

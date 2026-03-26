@@ -15,10 +15,27 @@
     <div class="page-shell">
       <header class="site-header">
         <a class="brand" href="index.html">
-          <span class="brand-mark">SB</span>
+          <span class="brand-playground" aria-hidden="true">
+            <img
+              class="brand-logo"
+              src="assets/images/sanjeeta-signature-logo.svg"
+              alt=""
+            />
+            <span class="brand-doodle sparkle">✦</span>
+            <span class="brand-doodle flower">✿</span>
+            <span class="brand-doodle dot dot-one"></span>
+            <span class="brand-doodle dot dot-two"></span>
+            <span class="brand-plane">✈</span>
+          </span>
           <span class="brand-copy">
-            <strong>Sanjeeta Bhandari</strong>
-            <small>Registered ECT / Educator</small>
+            <strong class="brand-name" aria-label="Sanjeeta Bhandari">
+              <span class="name-word first">Sanjeeta</span>
+              <span class="name-word second">Bhandari</span>
+            </strong>
+            <small class="brand-role">
+              <span class="role-pill role-primary">Registered ECT</span>
+              <span class="role-pill role-secondary">Early Childhood Educator</span>
+            </small>
           </span>
         </a>
         <nav class="main-nav" aria-label="Main navigation">
@@ -292,11 +309,170 @@
           </div>
           <div class="audio-panel">
             <p>
-              This website is prepared for themed audio. When you share your
-              tracks, we can add gentle classroom ambience, nature sounds,
-              playful transitions, or warm intro music in selected sections.
+              Press play and wander through a little sound garden filled with
+              soft melodies, calm classroom energy, and cozy story-time vibes.
+              Each track adds a different color to the page, like music for a
+              playful learning corner.
             </p>
-            <div class="audio-dock" data-audio-dock></div>
+            <div class="audio-library">
+              <article class="audio-card" data-audio-card>
+                <div class="audio-card-top">
+                  <span class="audio-pill">Welcome Track</span>
+                  <h3>Twinkle Little Star Song</h3>
+                  <p>
+                    A playful, familiar melody that suits your introduction and
+                    warm first impression.
+                  </p>
+                </div>
+                <div class="audio-player" data-audio-player>
+                  <button class="audio-toggle" type="button" data-audio-toggle aria-label="Play Twinkle Little Star Song">
+                    Play
+                  </button>
+                  <div class="audio-meta">
+                    <div class="audio-progress" aria-hidden="true">
+                      <span class="audio-progress-bar" data-audio-progress></span>
+                    </div>
+                    <div class="audio-times">
+                      <span data-audio-current>0:00</span>
+                      <span data-audio-duration>0:00</span>
+                    </div>
+                    <label class="audio-volume">
+                      <span>Volume</span>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.75"
+                        data-audio-volume
+                        aria-label="Adjust volume for Twinkle Little Star Song"
+                      />
+                    </label>
+                  </div>
+                </div>
+                <audio preload="metadata" data-audio-element>
+                  <source src="assets/audio/twinkle-little-star-song.mp3" type="audio/mpeg" />
+                </audio>
+              </article>
+
+              <article class="audio-card" data-audio-card>
+                <div class="audio-card-top">
+                  <span class="audio-pill">Forest Mood</span>
+                  <h3>Relaxing Nature Sound Mountain Creek Loop</h3>
+                  <p>
+                    Flowing water and gentle forest atmosphere for a peaceful,
+                    nature-filled background while visitors wander through your
+                    story.
+                  </p>
+                </div>
+                <div class="audio-player" data-audio-player>
+                  <button class="audio-toggle" type="button" data-audio-toggle aria-label="Play Relaxing Nature Sound Mountain Creek Loop">
+                    Play
+                  </button>
+                  <div class="audio-meta">
+                    <div class="audio-progress" aria-hidden="true">
+                      <span class="audio-progress-bar" data-audio-progress></span>
+                    </div>
+                    <div class="audio-times">
+                      <span data-audio-current>0:00</span>
+                      <span data-audio-duration>0:00</span>
+                    </div>
+                    <label class="audio-volume">
+                      <span>Volume</span>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.75"
+                        data-audio-volume
+                        aria-label="Adjust volume for Relaxing Nature Sound Mountain Creek Loop"
+                      />
+                    </label>
+                  </div>
+                </div>
+                <audio preload="metadata" data-audio-element>
+                  <source src="assets/audio/relaxing-nature-sound-mountain-creek-loop.mp3" type="audio/mpeg" />
+                </audio>
+              </article>
+
+              <article class="audio-card" data-audio-card>
+                <div class="audio-card-top">
+                  <span class="audio-pill">Flute Melody</span>
+                  <h3>Native American Flute</h3>
+                  <p>
+                    A smooth, airy flute melody with a gentle natural feel,
+                    perfect for quiet reflection and creative browsing.
+                  </p>
+                </div>
+                <div class="audio-player" data-audio-player>
+                  <button
+                    class="audio-toggle"
+                    type="button"
+                    data-audio-toggle
+                    aria-label="Play Native American Flute"
+                  >
+                    Play
+                  </button>
+                  <div class="audio-meta">
+                    <div class="audio-progress" aria-hidden="true">
+                      <span class="audio-progress-bar" data-audio-progress></span>
+                    </div>
+                    <div class="audio-times">
+                      <span data-audio-current>0:00</span>
+                      <span data-audio-duration>0:00</span>
+                    </div>
+                    <label class="audio-volume">
+                      <span>Volume</span>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.75"
+                        data-audio-volume
+                        aria-label="Adjust volume for Native American Flute"
+                      />
+                    </label>
+                  </div>
+                </div>
+                <audio
+                  preload="metadata"
+                  data-audio-element
+                >
+                  <source src="assets/audio/native-american-flute.mp3" type="audio/mpeg" />
+                </audio>
+              </article>
+            </div>
+
+            <div class="audio-attribution">
+              <p>
+                Music credits:
+                <a href="https://www.freesoundslibrary.com/twinkle-little-star-song/" target="_blank" rel="noreferrer">
+                  Free Sounds Library
+                </a>
+                tracks used under
+                <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
+                  CC BY 4.0
+                </a>,
+                including
+                <a href="https://www.freesoundslibrary.com/relaxing-nature-sound-mountain-creek-loop/" target="_blank" rel="noreferrer">
+                  mountain creek ambience
+                </a>.
+                Flute melody:
+                <a
+                  href="https://commons.wikimedia.org/wiki/File:Native_American_Flute.ogg"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Native American Flute by Jossi Fresco
+                </a>
+                used under
+                <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noreferrer">
+                  CC BY 2.5
+                </a>.
+              </p>
+            </div>
           </div>
         </section>
       </main>

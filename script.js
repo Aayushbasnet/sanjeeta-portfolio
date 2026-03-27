@@ -296,62 +296,22 @@ if (audioCards.length) {
   });
 }
 
-function initRocketGame() {
-  var rocketGame = document.querySelector("[data-game='rocket']");
-  var targetEl;
-  var countEl;
-  var bank;
-  var message;
-  var resetButton;
-  var rocket;
-  var target = 5;
-  var count = 0;
+const initRocketGame = () => {
+  const rocketGame = document.querySelector("[data-game='rocket']");
+  if (!rocketGame || rocketGame.dataset.ready === "true") return;
 
-  if (!rocketGame || rocketGame.getAttribute("data-ready") === "true") {
-    return;
-  }
+  const targetEl = rocketGame.querySelector("[data-rocket-target]");
+  const countEl = rocketGame.querySelector("[data-rocket-count]");
+  const bank = rocketGame.querySelector("[data-star-bank]");
+  const message = rocketGame.querySelector("[data-rocket-message]");
+  const resetButton = rocketGame.querySelector("[data-rocket-reset]");
+  const rocket = rocketGame.querySelector("[data-rocket]");
+  if (!targetEl || !countEl || !bank || !message || !resetButton || !rocket) return;
 
-  targetEl = rocketGame.querySelector("[data-rocket-target]");
-  countEl = rocketGame.querySelector("[data-rocket-count]");
-  bank = rocketGame.querySelector("[data-star-bank]");
-  message = rocketGame.querySelector("[data-rocket-message]");
-  resetButton = rocketGame.querySelector("[data-rocket-reset]");
-  rocket = rocketGame.querySelector("[data-rocket]");
+  let target = 5;
+  let count = 0;
 
-  if (!targetEl || !countEl || !bank || !message || !resetButton || !rocket) {
-    return;
-  }
-
-  function updateRocketMessage() {
-    if (count === target) {
-      message.textContent = "Blast off! You counted the perfect number of stars.";
-      rocket.classList.add("launch");
-    } else if (count > target) {
-      message.textContent = "Oops, that was too many stars. Try a new count.";
-      rocket.classList.remove("launch");
-    } else {
-      message.textContent = "Keep counting to get the rocket ready.";
-      rocket.classList.remove("launch");
-    }
-  }
-
-  function onStarClick(event) {
-    var star = event.currentTarget;
-
-    if (star.className.indexOf("used") !== -1) {
-      return;
-    }
-
-    star.className += " used";
-    count += 1;
-    countEl.textContent = String(count);
-    updateRocketMessage();
-  }
-
-  function buildStars() {
-    var i;
-    var star;
-
+  const buildStars = () => {
     target = Math.floor(Math.random() * 4) + 4;
     count = 0;
     targetEl.textContent = String(target);
@@ -360,162 +320,128 @@ function initRocketGame() {
     rocket.classList.remove("launch");
     bank.innerHTML = "";
 
-    for (i = 0; i < 8; i += 1) {
-      star = document.createElement("button");
+    for (let i = 0; i < 8; i += 1) {
+      const star = document.createElement("button");
       star.type = "button";
       star.className = "star-token";
-      star.appendChild(document.createTextNode("⭐"));
-      star.addEventListener("click", onStarClick);
+      star.textContent = "⭐";
+      star.addEventListener("click", () => {
+        if (star.classList.contains("used")) return;
+        star.classList.add("used");
+        count += 1;
+        countEl.textContent = String(count);
+        if (count === target) {
+          message.textContent = "Blast off! You counted the perfect number of stars.";
+          rocket.classList.add("launch");
+        } else if (count > target) {
+          message.textContent = "Oops, that was too many stars. Try a new count.";
+        } else {
+          message.textContent = "Keep counting to get the rocket ready.";
+        }
+      });
       bank.appendChild(star);
     }
-  }
+  };
 
   resetButton.addEventListener("click", buildStars);
-  rocketGame.setAttribute("data-ready", "true");
+  rocketGame.dataset.ready = "true";
   buildStars();
-}
+};
 
-function initPondGame() {
-  var pondGame = document.querySelector("[data-game='sink']");
-  var items;
-  var floatZone;
-  var sinkZone;
-  var message;
-  var i;
+const initPondGame = () => {
+  const pondGame = document.querySelector("[data-game='sink']");
+  if (!pondGame || pondGame.dataset.ready === "true") return;
 
-  if (!pondGame || pondGame.getAttribute("data-ready") === "true") {
-    return;
-  }
+  const items = Array.from(pondGame.querySelectorAll(".pond-item"));
+  const floatZone = pondGame.querySelector("[data-float-zone]");
+  const sinkZone = pondGame.querySelector("[data-sink-zone]");
+  const message = pondGame.querySelector("[data-pond-message]");
+  if (!items.length || !floatZone || !sinkZone || !message) return;
 
-  items = pondGame.querySelectorAll(".pond-item");
-  floatZone = pondGame.querySelector("[data-float-zone]");
-  sinkZone = pondGame.querySelector("[data-sink-zone]");
-  message = pondGame.querySelector("[data-pond-message]");
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      const answer = item.dataset.answer;
+      const bubble = document.createElement("div");
+      bubble.className = "pond-bubble";
+      bubble.textContent = item.textContent;
 
-  if (!items.length || !floatZone || !sinkZone || !message) {
-    return;
-  }
+      if (answer === "float") {
+        floatZone.appendChild(bubble);
+        message.textContent = `${item.textContent} floats. Great predicting!`;
+      } else {
+        sinkZone.appendChild(bubble);
+        message.textContent = `${item.textContent} sinks. Nice thinking!`;
+      }
 
-  function onPondItemClick(event) {
-    var item = event.currentTarget;
-    var answer = item.getAttribute("data-answer");
-    var bubble = document.createElement("div");
+      item.disabled = true;
+      item.style.opacity = "0.45";
+    });
+  });
 
-    bubble.className = "pond-bubble";
-    bubble.appendChild(document.createTextNode(item.textContent));
+  pondGame.dataset.ready = "true";
+};
 
-    if (answer === "float") {
-      floatZone.appendChild(bubble);
-      message.textContent = item.textContent + " floats. Great predicting!";
-    } else {
-      sinkZone.appendChild(bubble);
-      message.textContent = item.textContent + " sinks. Nice thinking!";
-    }
+const initPatternGame = () => {
+  const patternGame = document.querySelector("[data-game='pattern']");
+  if (!patternGame || patternGame.dataset.ready === "true") return;
 
-    item.disabled = true;
-    item.style.opacity = "0.45";
-  }
+  const flowers = ["🌸", "🌼", "🌺", "🌷"];
+  const targetRow = patternGame.querySelector("[data-pattern-target]");
+  const answerRow = patternGame.querySelector("[data-pattern-answer]");
+  const checkButton = patternGame.querySelector("[data-pattern-check]");
+  const resetButton = patternGame.querySelector("[data-pattern-reset]");
+  const message = patternGame.querySelector("[data-pattern-message]");
+  if (!targetRow || !answerRow || !checkButton || !resetButton || !message) return;
 
-  for (i = 0; i < items.length; i += 1) {
-    items[i].addEventListener("click", onPondItemClick);
-  }
+  let targetPattern = [];
 
-  pondGame.setAttribute("data-ready", "true");
-}
-
-function initPatternGame() {
-  var patternGame = document.querySelector("[data-game='pattern']");
-  var flowers = ["🌸", "🌼", "🌺", "🌷"];
-  var targetRow;
-  var answerRow;
-  var checkButton;
-  var resetButton;
-  var message;
-  var targetPattern = [];
-
-  if (!patternGame || patternGame.getAttribute("data-ready") === "true") {
-    return;
-  }
-
-  targetRow = patternGame.querySelector("[data-pattern-target]");
-  answerRow = patternGame.querySelector("[data-pattern-answer]");
-  checkButton = patternGame.querySelector("[data-pattern-check]");
-  resetButton = patternGame.querySelector("[data-pattern-reset]");
-  message = patternGame.querySelector("[data-pattern-message]");
-
-  if (!targetRow || !answerRow || !checkButton || !resetButton || !message) {
-    return;
-  }
-
-  function onFlowerClick(event) {
-    var button = event.currentTarget;
-    var currentIndex = parseInt(button.getAttribute("data-flower-index"), 10);
-    var nextIndex = (currentIndex + 1) % flowers.length;
-
-    button.setAttribute("data-flower-index", String(nextIndex));
-    button.textContent = flowers[nextIndex];
-  }
-
-  function buildPattern() {
-    var i;
-    var targetCell;
-    var answerCell;
-
-    targetPattern = [];
+  const buildPattern = () => {
+    targetPattern = Array.from({ length: 4 }, () => flowers[Math.floor(Math.random() * flowers.length)]);
     targetRow.innerHTML = "";
     answerRow.innerHTML = "";
     message.textContent = "Make the bottom row look the same as the top row.";
 
-    for (i = 0; i < 4; i += 1) {
-      targetPattern.push(flowers[Math.floor(Math.random() * flowers.length)]);
-    }
+    targetPattern.forEach((flower) => {
+      const cell = document.createElement("div");
+      cell.className = "flower-cell fixed";
+      cell.textContent = flower;
+      targetRow.appendChild(cell);
+    });
 
-    for (i = 0; i < targetPattern.length; i += 1) {
-      targetCell = document.createElement("div");
-      targetCell.className = "flower-cell fixed";
-      targetCell.appendChild(document.createTextNode(targetPattern[i]));
-      targetRow.appendChild(targetCell);
+    targetPattern.forEach((_, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "flower-cell";
+      button.dataset.flowerIndex = "0";
+      button.textContent = flowers[index % flowers.length];
+      button.addEventListener("click", () => {
+        const currentIndex = Number(button.dataset.flowerIndex);
+        const nextIndex = (currentIndex + 1) % flowers.length;
+        button.dataset.flowerIndex = String(nextIndex);
+        button.textContent = flowers[nextIndex];
+      });
+      answerRow.appendChild(button);
+    });
+  };
 
-      answerCell = document.createElement("button");
-      answerCell.type = "button";
-      answerCell.className = "flower-cell";
-      answerCell.setAttribute("data-flower-index", "0");
-      answerCell.appendChild(document.createTextNode(flowers[i % flowers.length]));
-      answerCell.addEventListener("click", onFlowerClick);
-      answerRow.appendChild(answerCell);
-    }
-  }
+  checkButton.addEventListener("click", () => {
+    const answer = Array.from(answerRow.children).map((cell) => cell.textContent);
+    const isMatch = answer.every((flower, index) => flower === targetPattern[index]);
+    message.textContent = isMatch
+      ? "Beautiful pattern match. You spotted every flower!"
+      : "Not quite yet. Look closely and try again.";
+  });
 
-  function checkPattern() {
-    var answerCells = answerRow.children;
-    var i;
-    var isMatch = true;
-
-    for (i = 0; i < answerCells.length; i += 1) {
-      if (answerCells[i].textContent !== targetPattern[i]) {
-        isMatch = false;
-        break;
-      }
-    }
-
-    if (isMatch) {
-      message.textContent = "Beautiful pattern match. You spotted every flower!";
-    } else {
-      message.textContent = "Not quite yet. Look closely and try again.";
-    }
-  }
-
-  checkButton.addEventListener("click", checkPattern);
   resetButton.addEventListener("click", buildPattern);
-  patternGame.setAttribute("data-ready", "true");
+  patternGame.dataset.ready = "true";
   buildPattern();
-}
+};
 
-function initGames() {
+const initGames = () => {
   initRocketGame();
   initPondGame();
   initPatternGame();
-}
+};
 
 initGames();
 document.addEventListener("DOMContentLoaded", initGames);

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sanjeeta Bhandari | STEM Playroom</title>
+    <meta
+      name="description"
+      content="Playful early childhood STEM games designed for counting, predicting, and pattern making."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="games-page">
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html">
+          <span class="brand-playground" aria-hidden="true">
+            <img
+              class="brand-logo"
+              src="assets/images/sanjeeta-signature-logo.svg"
+              alt=""
+            />
+            <span class="brand-doodle sparkle">✦</span>
+            <span class="brand-doodle flower">✿</span>
+            <span class="brand-doodle dot dot-one"></span>
+            <span class="brand-doodle dot dot-two"></span>
+            <span class="brand-plane">✈</span>
+          </span>
+          <span class="brand-copy">
+            <strong class="brand-name" aria-label="Sanjeeta Bhandari">
+              <span class="name-word first">Sanjeeta</span>
+              <span class="name-word second">Bhandari</span>
+            </strong>
+            <small class="brand-role">
+              <span class="role-pill role-primary">Registered ECT</span>
+              <span class="role-pill role-secondary">STEM Playroom</span>
+            </small>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="#games">Games</a>
+          <a href="#play-tips">Play Tips</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="games-hero">
+          <div>
+            <p class="eyebrow">STEM Playroom</p>
+            <h1>Play, notice, count, and wonder.</h1>
+            <p class="hero-text">
+              These little games are designed for early childhood children to
+              explore STEM ideas through playful counting, simple prediction,
+              and pattern making.
+            </p>
+          </div>
+          <div class="games-hero-art" aria-hidden="true">
+            <span>🚀</span>
+            <span>🫧</span>
+            <span>🌼</span>
+            <span>🔍</span>
+            <span>⭐</span>
+          </div>
+        </section>
+
+        <section class="games-grid" id="games">
+          <article class="game-card count-game" data-game="rocket">
+            <div class="game-heading">
+              <p class="section-kicker">Game 1</p>
+              <h2>Rocket Count</h2>
+              <p>Tap the stars and help the rocket collect the right amount of fuel.</p>
+            </div>
+            <div class="rocket-status">
+              <div>Target: <strong data-rocket-target>5</strong></div>
+              <div>Collected: <strong data-rocket-count>0</strong></div>
+            </div>
+            <div class="rocket-playground">
+              <div class="rocket" data-rocket>🚀</div>
+              <div class="star-bank" data-star-bank></div>
+            </div>
+            <div class="game-actions">
+              <button class="button button-secondary" type="button" data-rocket-reset>
+                New Count
+              </button>
+              <p class="game-message" data-rocket-message>
+                Tap stars until the count matches the target.
+              </p>
+            </div>
+          </article>
+
+          <article class="game-card sink-game" data-game="sink">
+            <div class="game-heading">
+              <p class="section-kicker">Game 2</p>
+              <h2>Float or Sink Pond</h2>
+              <p>Choose whether each object will float or sink.</p>
+            </div>
+            <div class="pond-items" data-pond-items>
+              <button class="pond-item" data-answer="float">Leaf 🍃</button>
+              <button class="pond-item" data-answer="sink">Rock 🪨</button>
+              <button class="pond-item" data-answer="float">Duck 🦆</button>
+              <button class="pond-item" data-answer="sink">Key 🔑</button>
+            </div>
+            <div class="pond-columns">
+              <div class="pond-column float">
+                <h3>Float</h3>
+                <div class="pond-dropzone" data-float-zone></div>
+              </div>
+              <div class="pond-column sink">
+                <h3>Sink</h3>
+                <div class="pond-dropzone" data-sink-zone></div>
+              </div>
+            </div>
+            <p class="game-message" data-pond-message>
+              Pick an object and make a prediction.
+            </p>
+          </article>
+
+          <article class="game-card pattern-game" data-game="pattern">
+            <div class="game-heading">
+              <p class="section-kicker">Game 3</p>
+              <h2>Pattern Garden</h2>
+              <p>Tap each flower below until it matches the pattern above.</p>
+            </div>
+            <div class="pattern-row target" data-pattern-target></div>
+            <div class="pattern-row answer" data-pattern-answer></div>
+            <div class="game-actions">
+              <button class="button button-primary" type="button" data-pattern-check>
+                Check Pattern
+              </button>
+              <button class="button button-secondary" type="button" data-pattern-reset>
+                New Pattern
+              </button>
+            </div>
+            <p class="game-message" data-pattern-message>
+              Make the bottom row look the same as the top row.
+            </p>
+          </article>
+        </section>
+
+        <section class="play-tips" id="play-tips">
+          <div class="section-heading">
+            <p class="section-kicker">Learning Through Play</p>
+            <h2>Why these little games matter.</h2>
+          </div>
+          <div class="tips-grid">
+            <article class="tip-card">
+              <h3>Math Thinking</h3>
+              <p>Children count, compare, and notice how many are needed.</p>
+            </article>
+            <article class="tip-card">
+              <h3>Science Thinking</h3>
+              <p>Children make predictions and test ideas through float and sink play.</p>
+            </article>
+            <article class="tip-card">
+              <h3>Patterns & Logic</h3>
+              <p>Children build memory, sequence, and visual noticing skills.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

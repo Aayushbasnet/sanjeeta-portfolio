@@ -42,6 +42,7 @@
           <a href="index.html">Home</a>
           <a href="#slider">Highlights</a>
           <a href="#layouts">Showcase</a>
+          <a href="games.html">Games</a>
           <a href="#future-audio">Audio</a>
         </nav>
       </header>
@@ -220,7 +221,8 @@
               Pick one and let it quietly color the mood.
             </p>
 
-            <div class="audio-library">
+            <div class="audio-carousel" data-audio-slider>
+              <div class="audio-library audio-slider-track">
               <article class="audio-card" data-audio-card>
                 <div class="audio-card-top">
                   <span class="audio-pill">Nature Mood</span>
@@ -268,11 +270,11 @@
 
               <article class="audio-card" data-audio-card>
                 <div class="audio-card-top">
-                  <span class="audio-pill">Creative Breeze</span>
-                  <h3>Native American Flute</h3>
+                  <span class="audio-pill">Playground Joy</span>
+                  <h3>Children Playing, Distant Playground Ambience</h3>
                   <p>
-                    A smooth, melodic flute piece that feels airy, gentle, and
-                    beautifully connected to nature.
+                    Soft playground energy that keeps the gallery child-centred,
+                    light, and full of cheerful atmosphere.
                   </p>
                 </div>
                 <div class="audio-player" data-audio-player>
@@ -280,7 +282,7 @@
                     class="audio-toggle"
                     type="button"
                     data-audio-toggle
-                    aria-label="Play Native American Flute"
+                    aria-label="Play Children Playing, Distant Playground Ambience"
                   >
                     Play
                   </button>
@@ -301,13 +303,13 @@
                         step="0.05"
                         value="0.75"
                         data-audio-volume
-                        aria-label="Adjust volume for Native American Flute"
+                        aria-label="Adjust volume for Children Playing, Distant Playground Ambience"
                       />
                     </label>
                   </div>
                 </div>
                 <audio preload="metadata" data-audio-element>
-                  <source src="assets/audio/native-american-flute.mp3" type="audio/mpeg" />
+                  <source src="assets/audio/children-play-ambience.mp3" type="audio/mpeg" />
                 </audio>
               </article>
 
@@ -354,36 +356,14 @@
                   <source src="assets/audio/twinkle-little-star-song.mp3" type="audio/mpeg" />
                 </audio>
               </article>
+              </div>
+              <div class="audio-slider-controls">
+                <button class="slider-button" type="button" data-audio-prev>Previous</button>
+                <div class="slider-dots" data-audio-dots></div>
+                <button class="slider-button" type="button" data-audio-next>Next</button>
+              </div>
             </div>
 
-            <div class="audio-attribution">
-              <p>
-                Music credits:
-                <a href="https://www.freesoundslibrary.com/twinkle-little-star-song/" target="_blank" rel="noreferrer">
-                  Free Sounds Library
-                </a>
-                tracks used under
-                <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
-                  CC BY 4.0
-                </a>,
-                including these
-                <a href="https://www.freesoundslibrary.com/relaxing-nature-sound-mountain-creek-loop/" target="_blank" rel="noreferrer">
-                  mountain creek ambience
-                </a>.
-                Flute melody:
-                <a
-                  href="https://commons.wikimedia.org/wiki/File:Native_American_Flute.ogg"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Native American Flute by Jossi Fresco
-                </a>
-                used under
-                <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noreferrer">
-                  CC BY 2.5
-                </a>.
-              </p>
-            </div>
           </div>
         </section>
       </main>

@@ -43,6 +43,7 @@
           <a href="#experience">Experience</a>
           <a href="#downloads">Downloads</a>
           <a href="gallery.html">Gallery</a>
+          <a href="games.html">Games</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -314,7 +315,8 @@
               Each track adds a different color to the page, like music for a
               playful learning corner.
             </p>
-            <div class="audio-library">
+            <div class="audio-carousel" data-audio-slider>
+              <div class="audio-library audio-slider-track">
               <article class="audio-card" data-audio-card>
                 <div class="audio-card-top">
                   <span class="audio-pill">Welcome Track</span>
@@ -398,11 +400,11 @@
 
               <article class="audio-card" data-audio-card>
                 <div class="audio-card-top">
-                  <span class="audio-pill">Flute Melody</span>
-                  <h3>Native American Flute</h3>
+                  <span class="audio-pill">Playground Joy</span>
+                  <h3>Children Playing, Distant Playground Ambience</h3>
                   <p>
-                    A smooth, airy flute melody with a gentle natural feel,
-                    perfect for quiet reflection and creative browsing.
+                    Gentle playground laughter and distant play sounds that add
+                    a child-centred, lively warmth without overpowering the page.
                   </p>
                 </div>
                 <div class="audio-player" data-audio-player>
@@ -410,7 +412,7 @@
                     class="audio-toggle"
                     type="button"
                     data-audio-toggle
-                    aria-label="Play Native American Flute"
+                    aria-label="Play Children Playing, Distant Playground Ambience"
                   >
                     Play
                   </button>
@@ -431,7 +433,7 @@
                         step="0.05"
                         value="0.75"
                         data-audio-volume
-                        aria-label="Adjust volume for Native American Flute"
+                        aria-label="Adjust volume for Children Playing, Distant Playground Ambience"
                       />
                     </label>
                   </div>
@@ -440,39 +442,17 @@
                   preload="metadata"
                   data-audio-element
                 >
-                  <source src="assets/audio/native-american-flute.mp3" type="audio/mpeg" />
+                  <source src="assets/audio/children-play-ambience.mp3" type="audio/mpeg" />
                 </audio>
               </article>
+              </div>
+              <div class="audio-slider-controls">
+                <button class="slider-button" type="button" data-audio-prev>Previous</button>
+                <div class="slider-dots" data-audio-dots></div>
+                <button class="slider-button" type="button" data-audio-next>Next</button>
+              </div>
             </div>
 
-            <div class="audio-attribution">
-              <p>
-                Music credits:
-                <a href="https://www.freesoundslibrary.com/twinkle-little-star-song/" target="_blank" rel="noreferrer">
-                  Free Sounds Library
-                </a>
-                tracks used under
-                <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
-                  CC BY 4.0
-                </a>,
-                including
-                <a href="https://www.freesoundslibrary.com/relaxing-nature-sound-mountain-creek-loop/" target="_blank" rel="noreferrer">
-                  mountain creek ambience
-                </a>.
-                Flute melody:
-                <a
-                  href="https://commons.wikimedia.org/wiki/File:Native_American_Flute.ogg"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Native American Flute by Jossi Fresco
-                </a>
-                used under
-                <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noreferrer">
-                  CC BY 2.5
-                </a>.
-              </p>
-            </div>
           </div>
         </section>
       </main>
@@ -530,6 +510,7 @@
 
         <div class="footer-links">
           <a href="gallery.html">Visit the gallery</a>
+          <a href="games.html">Play STEM games</a>
           <a href="assets/downloads/Sanjeeta-Bhandari-CV.pdf" download>Download CV</a>
           <a href="assets/downloads/Sanjeeta-Bhandari-Portfolio-Flyer.png" download>Download flyer</a>
         </div>

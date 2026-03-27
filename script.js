@@ -177,6 +177,52 @@ const formatAudioTime = (seconds) => {
   return `${mins}:${secs}`;
 };
 
+const audioSliders = Array.from(document.querySelectorAll("[data-audio-slider]"));
+
+audioSliders.forEach((slider) => {
+  const cards = Array.from(slider.querySelectorAll("[data-audio-card]"));
+  const prevButton = slider.querySelector("[data-audio-prev]");
+  const nextButton = slider.querySelector("[data-audio-next]");
+  const dotsRoot = slider.querySelector("[data-audio-dots]");
+  let activeIndex = 0;
+
+  if (!cards.length || !dotsRoot) return;
+
+  const renderDots = () => {
+    dotsRoot.innerHTML = cards
+      .map(
+        (_, index) =>
+          `<button class="slider-dot${
+            index === activeIndex ? " is-active" : ""
+          }" type="button" aria-label="Go to audio ${index + 1}" data-audio-index="${index}"></button>`
+      )
+      .join("");
+  };
+
+  const showCard = (index) => {
+    activeIndex = (index + cards.length) % cards.length;
+    cards.forEach((card, cardIndex) => {
+      const isActive = cardIndex === activeIndex;
+      card.classList.toggle("is-active", isActive);
+      if (!isActive) {
+        const audio = card.querySelector("[data-audio-element]");
+        if (audio) audio.pause();
+      }
+    });
+    renderDots();
+  };
+
+  prevButton?.addEventListener("click", () => showCard(activeIndex - 1));
+  nextButton?.addEventListener("click", () => showCard(activeIndex + 1));
+  dotsRoot.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-audio-index]");
+    if (!button) return;
+    showCard(Number(button.dataset.audioIndex));
+  });
+
+  showCard(0);
+});
+
 const audioCards = Array.from(document.querySelectorAll("[data-audio-card]"));
 
 if (audioCards.length) {
@@ -249,3 +295,153 @@ if (audioCards.length) {
     });
   });
 }
+
+const initRocketGame = () => {
+  const rocketGame = document.querySelector("[data-game='rocket']");
+  if (!rocketGame || rocketGame.dataset.ready === "true") return;
+
+  const targetEl = rocketGame.querySelector("[data-rocket-target]");
+  const countEl = rocketGame.querySelector("[data-rocket-count]");
+  const bank = rocketGame.querySelector("[data-star-bank]");
+  const message = rocketGame.querySelector("[data-rocket-message]");
+  const resetButton = rocketGame.querySelector("[data-rocket-reset]");
+  const rocket = rocketGame.querySelector("[data-rocket]");
+  if (!targetEl || !countEl || !bank || !message || !resetButton || !rocket) return;
+
+  let target = 5;
+  let count = 0;
+
+  const buildStars = () => {
+    target = Math.floor(Math.random() * 4) + 4;
+    count = 0;
+    targetEl.textContent = String(target);
+    countEl.textContent = "0";
+    message.textContent = "Tap stars until the count matches the target.";
+    rocket.classList.remove("launch");
+    bank.innerHTML = "";
+
+    for (let i = 0; i < 8; i += 1) {
+      const star = document.createElement("button");
+      star.type = "button";
+      star.className = "star-token";
+      star.textContent = "⭐";
+      star.addEventListener("click", () => {
+        if (star.classList.contains("used")) return;
+        star.classList.add("used");
+        count += 1;
+        countEl.textContent = String(count);
+        if (count === target) {
+          message.textContent = "Blast off! You counted the perfect number of stars.";
+          rocket.classList.add("launch");
+        } else if (count > target) {
+          message.textContent = "Oops, that was too many stars. Try a new count.";
+        } else {
+          message.textContent = "Keep counting to get the rocket ready.";
+        }
+      });
+      bank.appendChild(star);
+    }
+  };
+
+  resetButton.addEventListener("click", buildStars);
+  rocketGame.dataset.ready = "true";
+  buildStars();
+};
+
+const initPondGame = () => {
+  const pondGame = document.querySelector("[data-game='sink']");
+  if (!pondGame || pondGame.dataset.ready === "true") return;
+
+  const items = Array.from(pondGame.querySelectorAll(".pond-item"));
+  const floatZone = pondGame.querySelector("[data-float-zone]");
+  const sinkZone = pondGame.querySelector("[data-sink-zone]");
+  const message = pondGame.querySelector("[data-pond-message]");
+  if (!items.length || !floatZone || !sinkZone || !message) return;
+
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      const answer = item.dataset.answer;
+      const bubble = document.createElement("div");
+      bubble.className = "pond-bubble";
+      bubble.textContent = item.textContent;
+
+      if (answer === "float") {
+        floatZone.appendChild(bubble);
+        message.textContent = `${item.textContent} floats. Great predicting!`;
+      } else {
+        sinkZone.appendChild(bubble);
+        message.textContent = `${item.textContent} sinks. Nice thinking!`;
+      }
+
+      item.disabled = true;
+      item.style.opacity = "0.45";
+    });
+  });
+
+  pondGame.dataset.ready = "true";
+};
+
+const initPatternGame = () => {
+  const patternGame = document.querySelector("[data-game='pattern']");
+  if (!patternGame || patternGame.dataset.ready === "true") return;
+
+  const flowers = ["🌸", "🌼", "🌺", "🌷"];
+  const targetRow = patternGame.querySelector("[data-pattern-target]");
+  const answerRow = patternGame.querySelector("[data-pattern-answer]");
+  const checkButton = patternGame.querySelector("[data-pattern-check]");
+  const resetButton = patternGame.querySelector("[data-pattern-reset]");
+  const message = patternGame.querySelector("[data-pattern-message]");
+  if (!targetRow || !answerRow || !checkButton || !resetButton || !message) return;
+
+  let targetPattern = [];
+
+  const buildPattern = () => {
+    targetPattern = Array.from({ length: 4 }, () => flowers[Math.floor(Math.random() * flowers.length)]);
+    targetRow.innerHTML = "";
+    answerRow.innerHTML = "";
+    message.textContent = "Make the bottom row look the same as the top row.";
+
+    targetPattern.forEach((flower) => {
+      const cell = document.createElement("div");
+      cell.className = "flower-cell fixed";
+      cell.textContent = flower;
+      targetRow.appendChild(cell);
+    });
+
+    targetPattern.forEach((_, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "flower-cell";
+      button.dataset.flowerIndex = "0";
+      button.textContent = flowers[index % flowers.length];
+      button.addEventListener("click", () => {
+        const currentIndex = Number(button.dataset.flowerIndex);
+        const nextIndex = (currentIndex + 1) % flowers.length;
+        button.dataset.flowerIndex = String(nextIndex);
+        button.textContent = flowers[nextIndex];
+      });
+      answerRow.appendChild(button);
+    });
+  };
+
+  checkButton.addEventListener("click", () => {
+    const answer = Array.from(answerRow.children).map((cell) => cell.textContent);
+    const isMatch = answer.every((flower, index) => flower === targetPattern[index]);
+    message.textContent = isMatch
+      ? "Beautiful pattern match. You spotted every flower!"
+      : "Not quite yet. Look closely and try again.";
+  });
+
+  resetButton.addEventListener("click", buildPattern);
+  patternGame.dataset.ready = "true";
+  buildPattern();
+};
+
+const initGames = () => {
+  initRocketGame();
+  initPondGame();
+  initPatternGame();
+};
+
+initGames();
+document.addEventListener("DOMContentLoaded", initGames);
